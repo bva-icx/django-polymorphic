@@ -3,6 +3,7 @@ PolymorphicQuerySet support functions
 """
 import copy
 from collections import deque
+from functools import lru_cache
 
 from django.apps import apps
 from django.contrib.contenttypes.models import ContentType
@@ -233,23 +234,25 @@ def _get_all_sub_models(base_model):
     return result
 
 
+@lru_cache(maxsize=64)
 def _create_base_path(baseclass, myclass):
     # create new field path for expressions, e.g. for baseclass=ModelA, myclass=ModelC
     # 'modelb__modelc" is returned
     for b in myclass.__bases__:
         if b == baseclass:
-            return _get_query_related_name(myclass)
+            return get_query_related_name(myclass)
 
         path = _create_base_path(baseclass, b)
         if path:
             if b._meta.abstract or b._meta.proxy:
-                return _get_query_related_name(myclass)
+                return get_query_related_name(myclass)
             else:
-                return path + "__" + _get_query_related_name(myclass)
+                return path + "__" + get_query_related_name(myclass)
     return ""
 
 
-def _get_query_related_name(myclass):
+@lru_cache(maxsize=64)
+def get_query_related_name(myclass):
     for f in myclass._meta.local_fields:
         if isinstance(f, models.OneToOneField) and f.remote_field.parent_link:
             return f.related_query_name()
