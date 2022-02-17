@@ -127,6 +127,7 @@ def _translate_polymorphic_filter_definition(
     return (newpath, field_val)
 
 
+@lru_cache(maxsize=64)
 def translate_polymorphic_field_path(queryset_model, field_path):
     """
     Translate a field path from a keyword argument, as used for
