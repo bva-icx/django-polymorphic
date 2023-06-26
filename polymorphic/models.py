@@ -198,9 +198,18 @@ class PolymorphicModel(with_metaclass(PolymorphicModelBase, models.Model)):
         self.__class__.polymorphic_super_sub_accessors_replaced = True
 
         def create_accessor_function_for_model(model, accessor_name):
+            NOT_PROVIDED = object()
+
             def accessor_function(self):
-                objects = getattr(model, "_base_objects", model.objects)
-                attr = objects.get(pk=self.pk)
+                attr = NOT_PROVIDED
+                try:
+                    attr = self._state.fields_cache[accessor_name]
+                    pass
+                except KeyError:
+                    pass
+                if attr is NOT_PROVIDED:
+                    objects = getattr(model, "_base_objects", model.objects)
+                    attr = objects.get(pk=self.pk)
                 return attr
 
             return accessor_function
