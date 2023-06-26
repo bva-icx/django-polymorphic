@@ -83,7 +83,13 @@ def runtests():
     test_apps = (
         list(filter(lambda arg: not arg.startswith("-"), sys.argv[1:])) or DEFAULT_TEST_APPS
     )
-    argv = sys.argv[:1] + ["test", "--traceback"] + other_args + test_apps
+    if "makemigrations" in sys.argv:
+        argv = sys.argv
+    elif "migrate" in sys.argv:
+        argv = sys.argv[:1] + ["migrate", "polymorphic.test"]
+    else:
+        argv = sys.argv[:1] + ["test", "--traceback"] + other_args + test_apps
+
     execute_from_command_line(argv)
 
 
