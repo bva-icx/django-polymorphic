@@ -11,6 +11,7 @@ from polymorphic import compat, query_translate
 from polymorphic.managers import PolymorphicManager
 from polymorphic.models import PolymorphicTypeInvalid, PolymorphicTypeUndefined
 from polymorphic.tests.models import (
+    AliasOfNonProxyChild,
     AliasProxyChild,
     ArtProject,
     Base,
@@ -52,6 +53,7 @@ from polymorphic.tests.models import (
     MultiTableDerived,
     MyManager,
     MyManagerQuerySet,
+    NonAliasNonProxyChild,
     NonPolymorphicParent,
     NonProxyChild,
     One2OneRelatingModel,
@@ -67,6 +69,7 @@ from polymorphic.tests.models import (
     ProxiedBase,
     ProxyBase,
     ProxyChild,
+    ProxyChildAliasProxy,
     ProxyModelA,
     ProxyModelB,
     ProxyModelBase,
@@ -82,19 +85,14 @@ from polymorphic.tests.models import (
     SubclassSelectorProxyBaseModel,
     SubclassSelectorProxyConcreteModel,
     TestParentLinkAndRelatedName,
+    TradProxyOnProxyChild,
+    TradProxyChild,
     UUIDArtProject,
     UUIDPlainA,
     UUIDPlainB,
     UUIDPlainC,
     UUIDProject,
     UUIDResearchProject,
-
-    NonAliasNonProxyChild,
-    TradProxyOnProxyChild,
-    TradProxyChild,
-    AliasOfNonProxyChild,
-    ProxyChildAliasProxy,
-
 )
 
 
