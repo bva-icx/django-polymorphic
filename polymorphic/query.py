@@ -18,7 +18,7 @@ from .query_translate import (
     translate_polymorphic_filter_definitions_in_args,
     translate_polymorphic_filter_definitions_in_kwargs,
     translate_polymorphic_Q_object,
-    _get_query_related_name,
+    get_query_related_name,
     _get_all_sub_models,
     _create_base_path,
 )
@@ -830,7 +830,7 @@ class PolymorphicQuerySet(PolymorphicQuerySetMixin, QuerySet):
         # Also see PolymorphicModelIterable.fetch_polymorphic
 
         filter_relations = [
-            _get_query_related_name(mdl_cls)
+            get_query_related_name(mdl_cls)
             for mdl_cls in _get_all_sub_models(self.model).values()
         ]
 
