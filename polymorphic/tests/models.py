@@ -377,8 +377,10 @@ class TradProxyChild(ProxyBase):
         proxy = True
         polymorphic__proxy = True
 
+
 # base(poly) -> proxy(Traditional Django) -> proxy(poly)
 # Not really helpful model as reduces to base(poly) -> proxy(poly)
+
 
 # base(poly) -> child(poly) -> proxy(Traditional Django)
 class AliasOfNonProxyChild(NonProxyChild):
@@ -405,8 +407,6 @@ class NonAliasNonProxyChild(NonProxyChild):
     class Meta:
         proxy = True
         polymorphic__proxy = False
-
-
 
 
 class ProxiedBase(ShowFieldTypeAndContent, PolymorphicModel):

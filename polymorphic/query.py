@@ -830,8 +830,7 @@ class PolymorphicQuerySet(PolymorphicQuerySetMixin, QuerySet):
         # Also see PolymorphicModelIterable.fetch_polymorphic
 
         filter_relations = [
-            get_query_related_name(mdl_cls)
-            for mdl_cls in _get_all_sub_models(self.model).values()
+            get_query_related_name(mdl_cls) for mdl_cls in _get_all_sub_models(self.model).values()
         ]
 
         for real_concrete_class, idlist in idlist_per_model.items():

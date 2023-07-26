@@ -218,9 +218,11 @@ class PolymorphicModel(with_metaclass(PolymorphicModelBase, models.Model)):
                 type(orig_accessor),
                 (ReverseOneToOneDescriptor, ForwardManyToOneDescriptor),
             ):
-
-                field = orig_accessor.related \
-                    if isinstance(orig_accessor, ReverseOneToOneDescriptor) else orig_accessor.field
+                field = (
+                    orig_accessor.related
+                    if isinstance(orig_accessor, ReverseOneToOneDescriptor)
+                    else orig_accessor.field
+                )
 
                 setattr(
                     self.__class__,

@@ -914,10 +914,8 @@ class PolymorphicTests(TransactionTestCase):
     def test_polymorphic_proxy_object_has_different_ctype_from_base(self):
         obj1 = ProxyBase.objects.create(some_data="Base1")
         obj2 = AliasProxyChild.objects.create(some_data="ProxyChild1")
-        obj1_ctype = ContentType.objects.get_for_model(
-            obj1, for_concrete_model=False)
-        obj2_ctype = ContentType.objects.get_for_model(
-            obj2, for_concrete_model=False)
+        obj1_ctype = ContentType.objects.get_for_model(obj1, for_concrete_model=False)
+        obj2_ctype = ContentType.objects.get_for_model(obj2, for_concrete_model=False)
         self.assertNotEqual(obj1_ctype, obj2_ctype)
 
     def test_can_create_django_style_proxy_classes_alias(self):
@@ -931,7 +929,7 @@ class PolymorphicTests(TransactionTestCase):
         ProxyBase.objects.create(some_data="Base1")
         ProxyChild.objects.create(some_data="Base1")
         TradProxyOnProxyChild.objects.create(some_data="Base3")
-        
+
         self.assertEqual(3, ProxyBase.objects.count())
         self.assertEqual(2, ProxyChild.objects.count())
         self.assertEqual(3, TradProxyOnProxyChild.objects.count())
