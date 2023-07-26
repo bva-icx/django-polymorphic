@@ -365,13 +365,13 @@ class PolymorphicModelIterable(ModelIterable):
                         select_related = {}
                     if isinstance(v, dict):
                         if model_name in v:
-                            select_related = dict_merge(select_related, v[model_name])
+                            select_related = merge_dicts(select_related, v[model_name])
                         else:
                             for field in qs.model._meta.fields:
                                 if field.name in v:
-                                    select_related = dict_merge(select_related, v[field.name])
+                                    select_related = merge_dicts(select_related, v[field.name])
                     else:
-                        select_related = dict_merge(select_related, v)
+                        select_related = merge_dicts(select_related, v)
             qs.query.select_related = select_related
         return qs
 
@@ -942,13 +942,13 @@ class PolymorphicQuerySet(PolymorphicQuerySetMixin, QuerySet):
                     if k == relation:
                         if isinstance(v, dict):
                             if model_name in v:
-                                select_related = dict_merge(select_related, v[model_name])
+                                select_related = merge_dicts(select_related, v[model_name])
                             else:
                                 for field in qs.model._meta.fields:
                                     if field.name in v:
-                                        select_related = dict_merge(select_related, v[field.name])
+                                        select_related = merge_dicts(select_related, v[field.name])
                         else:
-                            select_related = dict_merge(select_related, v)
+                            select_related = merge_dicts(select_related, v)
                     else:
                         select_related[k] = v
 
