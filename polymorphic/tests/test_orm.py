@@ -201,7 +201,7 @@ class PolymorphicTests(TransactionTestCase):
         UUIDResearchProject.objects.create(topic="Swallow Aerodynamics", supervisor="Dr. Winter")
 
         qs = UUIDProject.objects.all()
-        ol = list(qs)
+        list(qs)
         a = qs[0]
         b = qs[1]
         c = qs[2]
@@ -1714,7 +1714,7 @@ class PolymorphicTests(TransactionTestCase):
             #    * 0 for AltChildAsBaseModel object as from select_related (x1)
             #    * 0 for AltChildModel object as part of select_related form
             #        AltChildAsBaseModel (x1)
-            all_objs = [obj for obj in ParentModel.objects.select_related("AltChildAsBaseModel")]
+            [obj for obj in ParentModel.objects.select_related("AltChildAsBaseModel")]
 
     def test_prefetch_object_is_supported(self):
         b1 = RelatingModel.objects.create()
@@ -1809,7 +1809,7 @@ class PolymorphicTests(TransactionTestCase):
             # query for AltChildWithM2MModel # level 2 (m2m)
             qs = PlainModelWithM2M.objects.all()
             qs = qs.prefetch_related("m2m__altchildmodel__altchildWithm2mmodel__m2m")
-            all_objs = list(qs)
+            list(qs)
 
     @expectedFailure
     def test_prefetch_loading_relation_only_on_some_poly_model_using_modelnames(self):
@@ -1852,4 +1852,4 @@ class PolymorphicTests(TransactionTestCase):
             # query for AltChildWithM2MModel # level 2 (m2m)
             qs = PlainModelWithM2M.objects.all()
             qs = qs.prefetch_related("m2m__AltChildWithM2MModel__m2m")
-            all_objs = list(qs)
+            list(qs)

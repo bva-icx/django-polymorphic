@@ -28,7 +28,8 @@ The following filters are provided;
                     {# django-polymorphic formset (e.g. PolymorphicInlineFormSetView) #}
                     <div class="btn-group" role="group">
                       {% for model in formset.child_forms %}
-                          <a type="button" data-type="{{ model|as_model_name }}" class="js-add-form btn btn-default">{% glyphicon 'plus' %} {{ model|as_verbose_name }}</a>
+                          <a type="button" data-type="{{ model|as_model_name }}"
+                            class="js-add-form btn btn-default">{% glyphicon 'plus' %} {{ model|as_verbose_name }}</a>
                       {% endfor %}
                     </div>
                 {% else %}
@@ -41,7 +42,9 @@ The following filters are provided;
 
         {% for form in formset|include_empty_form %}
           {% block formset_form_wrapper %}
-            <div id="{{ form.prefix }}" data-inline-type="{{ form|as_form_type|lower }}" class="inline-related{% if '__prefix__' in form.prefix %} empty-form{% endif %}">
+            <div id="{{ form.prefix }}"
+                data-inline-type="{{ form|as_form_type|lower }}"
+                class="inline-related{% if '__prefix__' in form.prefix %} empty-form{% endif %}">
                 {{ form.non_field_errors }}
 
                 {# Add the 'pk' field that is not mentioned in crispy #}

@@ -12,7 +12,7 @@ from django.core.exceptions import FieldDoesNotExist
 from django.db.models import FilteredRelation
 from django.db.models.constants import LOOKUP_SEP
 from django.db.models.query import ModelIterable, Q, QuerySet
-from django.db.models.query import BaseIterable, RelatedPopulator
+from django.db.models.query import RelatedPopulator
 from .query_translate import (
     translate_polymorphic_field_path,
     translate_polymorphic_filter_definitions_in_args,
